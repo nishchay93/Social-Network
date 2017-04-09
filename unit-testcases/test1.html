@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Refactored date examples</title>
+ 
+  <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.3.0.css">
+  <script src="https://code.jquery.com/qunit/qunit-2.3.0.js"></script>
+  <script src="blanket.js"></script>
+<script data-cover src="js.js"></script>
+ 
+  <script>
+  QUnit.test("Registration Box Test", function( assert ) {
+    //First Name test
+    assert.equal(chkfname(""), true); //Inserting null creates an error
+	assert.equal(chkfname("John"), false); //Inserting string should not create an error
+	
+	// Last Name Test
+	assert.equal(chklname(""), true); //Inserting null creates an error
+	assert.equal(chklname("Doe"), false); //Inserting string should not create an error
+	
+	//Email test for empty email
+	assert.equal(chkemail("hedsf"), false);//Inserting string should not create an error
+	assert.equal(chkemail(""), true);//Inserting null creates an error
+	
+	//Email test for invalid email type
+	assert.equal(chkemail2("hello@examplecom"), true); // Inserting wrong email creates error
+	assert.equal(chkemail2("@example.com"), true); // Inserting wrong email creates error
+	assert.equal(chkemail2("@.com"), true); // Inserting wrong email creates error
+	assert.equal(chkemail2("hello@example.com"), false); // Inserting email does not creates error
+	
+	// Password Test
+	assert.equal(chkpwd(""), true); //Inserting null creates an error
+	assert.equal(chkpwd("pswrdd"), false); //Inserting string should not create an error
+	
+	// Password test for matching
+	assert.equal(chkpwd1("pswrd","pswrd"), false); //Same strings should not create an error.
+	assert.equal(chkpwd1("abcde","pswrd"), true); //Different strings should create an error.
+	
+	// Check Age less than 13 Years
+	assert.equal(chkAge(1999,03,20), false); //Age greater than 13 should not create an alert.
+	assert.equal(chkAge(2012,03,20), true); //Age less than 13 should create an alert.
+	
+  });
+  
+   QUnit.test("Login Box Test", function( assert ) {
+      
+   //Email test for empty email
+	assert.equal(chkemail("abc@gmail.com"), false);//Inserting string should not create an error.
+	
+	assert.equal(chkemail(""), true);//Inserting null creates an error
+	
+	// Password Test
+	assert.equal(chkpwd(""), true); //Inserting null creates an error
+	assert.equal(chkpwd("pswrdd"), false); //Inserting string should not create an error
+   
+   });
+  </script>
+</head>
+<body>
+ 
+<div id="qunit"></div>
+ 
+</body>
+</html
