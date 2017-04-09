@@ -1,3 +1,87 @@
+/***Check First Name***/
+function chkfname(abcd)
+{
+	if(abcd==null || abcd=="")
+  {
+ 
+  return true;
+  }
+  else
+	  return false;
+}
+/***Check Last Name***/
+
+function chklname(lnm){
+	if (lnm==null || lnm=="")
+  {
+  
+  return true;
+  }
+   else
+	  return false;
+	
+}
+/***Check Email***/
+
+function chkemail(eml){
+	  if (eml==null || eml=="")
+  {
+  return true;
+  }
+     else
+	  return false;
+	
+}
+
+/***Check Email for invalid type***/
+
+function chkemail2(eml){
+	
+	var atpos=eml.indexOf("@");
+   var dotpos=eml.lastIndexOf(".");
+   if (atpos<1 || dotpos<atpos+2 || dotpos+2>=eml.length) //Checks if @ is first character, if email is @. or if the . is not in the string
+  	{
+  		return true;
+  	}
+	else
+	  return false;
+}
+
+/***Check Password***/
+function chkpwd(pd){
+	if (pd == "" || pd == null)
+		{
+	return true;
+		}
+	else
+	  return false;
+}
+
+/***Match Passwords***/
+
+function chkpwd1(pd1,pd2){
+if (pd1 != pd2){return true;}
+else
+	  return false;
+}
+
+function chkAge(byear,bmonth,bday){
+
+var min_age = 13;
+
+	var submitteddate = new Date((byear + min_age), bmonth, bday); //get date in JS format
+	var today = new Date;
+
+	if ( (today.getTime() - submitteddate.getTime()) < 0) { //If thier age is less than 13, this will generate an alert.
+				return true;
+		}
+	else
+	  return false;
+
+}
+
+
+
 /***Prints The Days on the Registration Form***/
 function printDays()
 {
@@ -12,7 +96,7 @@ function printYears()
 {
 for(i=0;i<83;i++)
 { 
-var dateVar = 1930 + i; 
+var dateVar = 1930 + i; -
 document.write('<option value=\"' + dateVar + '\">' + dateVar + '</option>'); 
 }
 }
@@ -29,63 +113,58 @@ var birthyear = parseInt(document.forms["register"]["year"].value);
 var birthmonth = parseInt(document.forms["register"]["month"].value) - 1;
 var birthday = parseInt(document.forms["register"]["day"].value);
 
-if (fname==null || fname=="")
-  {
-  var div = document.getElementById("error");
-    div.textContent = "First name must be filled in";
+if(chkfname(fname)==true){
+	 var div = document.getElementById("error");
+    div.textContent = 	"First name must be filled in";
     var text = div.textContent;
-  return false;
-  }
-  if (lname==null || lname=="")
-  {
-  var div = document.getElementById("error");
+	return false;
+	}
+	
+
+if(chklname(lname)==true){
+	var div = document.getElementById("error");
     div.textContent = "Last name must be filled in";
     var text = div.textContent;
-  return false;
-  }
-  if (email==null || email=="")
-  {
-  var div = document.getElementById("error");
+	return false;
+	}
+	
+if(chkemail(email)==true){
+	var div = document.getElementById("error");
     div.textContent = "E-mail must be filled in";
     var text = div.textContent;
-  return false;
-  }
-  var atpos=email.indexOf("@");
-   var dotpos=email.lastIndexOf(".");
-   if (atpos<1 || dotpos<atpos+2 || dotpos+2>=email.length) //Checks if @ is first character, if email is @. or if the . is not in the string
-  	{
-  		var div = document.getElementById("error");
+	return false;
+	}
+if(chkemail2(email)==true){
+		var div = document.getElementById("error");
     div.textContent = "Not a valid e-mail address";
     var text = div.textContent;
-  		return false;
-  	}
-  if (pwd1 != pwd2)
-  {
+	return false;
+	}
+
+  if(chkpwd(pwd1)==true){
+	   var div = document.getElementById("error");
+    div.textContent = "Passwords must be filled in";
+    var text = div.textContent;
+	return false;
+	  
+  }
+
+  
+   if(chkpwd1(pwd1,pwd2)==true){
  var div = document.getElementById("error");
     div.textContent = "Passwords don't match";
     var text = div.textContent;
   return false;
   }
 
-   if (pwd1 == "" || pwd1 == null)
-  {
- var div = document.getElementById("error");
-    div.textContent = "Passwords must be filled in";
-    var text = div.textContent;
-  return false;
-  }
 
-  
-  	//Minimum Age to Allow on the Site. Due to Children's Online Privacy Protection, this is 13
- 	var min_age = 13;
-
-	var submitteddate = new Date((birthyear + min_age), birthmonth, birthday); //get date in JS format
-	var today = new Date;
-
-	if ( (today.getTime() - submitteddate.getTime()) < 0) { //If thier age is less than 13, this will return false
+	if(chkAge(birthyear,birthmonth,birthday)==true){
+		
 		alert("Sorry! Due to the Children's Online Privacy Protection Act, you must be 13 years old to join the Brotherhood.");
 		return false;
-		}
+	}
+  
+  	
 }
 
 /***Validates The Login Box***/
@@ -94,17 +173,16 @@ function validatelogin()
 var pwd=document.forms["loginbox"]["password"].value;
 var email=document.forms["loginbox"]["email"].value;
 
-if (pwd==null || pwd=="")
-  {
-  alert("Please fill in your password.");
-  return false;
-  }
-if (email==null || email=="")
-{
-  alert("Email must be filled in.");
-  return false;
-}
 
+if(chkemail(email)==true){
+	  alert("Email must be filled in!");
+	return false;
+	}
+
+if(chkpwd(pwd)==true){
+	    alert("Please fill in your Password!");
+	return false;
+  }
 
 }
 
@@ -148,7 +226,7 @@ window.location = "requests.php";
 function validatemissinginfomname()
 {
 	var mname=document.forms["missinginfo"]["mname"].value;
-	if (fname==null || "mname"=="")
+	if (mname==null || mname=="")
   	{
   		alert("Middle name must be filled in");
   		return false;
